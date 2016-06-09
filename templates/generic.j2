@@ -1,0 +1,9 @@
+{% if item.description is defined and item.description != '' %}
+Description='{{ item.description }}'
+{% endif %}
+Connection='{{ item.connection }}'
+{% if item.connection == 'pppoe' %}
+interface='{{ item.physdev }}'
+{% else %}
+Interface='{{ item.interface }}'
+{% endif %}

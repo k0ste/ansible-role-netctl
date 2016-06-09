@@ -1,0 +1,6 @@
+Mode='{{ item.tun_mode }}'
+Local='{{ item.tun_local }}'
+Remote='{{ item.tun_remote }}'
+{% if item.tun_mode == 'gre' and item.tun_key is defined %}
+Key='{{ item.tun_key }}'
+{% endif %}

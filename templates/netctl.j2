@@ -1,0 +1,14 @@
+## netctl@{{ item.interface }}
+# {{ ansible_managed }}
+# Do not edit manually
+
+{% if item.connection is defined %}{%- include 'generic.j2' -%}{% endif %}
+{% if item.ip is defined %}{%- include 'ip.j2' -%}{% endif %}
+{% if item.connection == 'vlan' %}{%- include '8021q.j2' -%}
+{% elif item.connection == 'bond' %}{%- include 'bond.j2' -%}
+{% elif item.connection == 'tunnel' %}{%- include 'tunnel.j2' -%}
+{% elif item.connection == 'pppoe' %}{%- include 'pppoe.j2' -%}
+{% endif %}
+
+{% include 'carrier.j2' %}
+{% include 'exec.j2' %}

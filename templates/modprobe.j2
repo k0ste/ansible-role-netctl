@@ -1,0 +1,9 @@
+## bonding.conf
+# {{ ansible_managed }}
+# Do not edit manually
+
+{% if netctl_bonding is defined %}
+{% for k,v in netctl_bonding.items() %}
+options bonding {{ k + '=' + v }}
+{% endfor %}
+{% endif %}

@@ -1,0 +1,5 @@
+{% if item.physdev is string %}
+BindsToInterfaces='{{ item.physdev }}'
+{% elif item.physdev %}
+BindsToInterfaces=({% if item.physdev %}{{ '\'' + item.physdev | join('\' \'') + '\'' }}{% endif %})
+{% endif %}

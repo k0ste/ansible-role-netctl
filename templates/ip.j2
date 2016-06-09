@@ -1,0 +1,29 @@
+{% if item.ip == 'static' %}
+IP='{{ item.ip }}'
+{% if item.address is defined and item.address | ipaddr('host/prefix') %}
+{% if item.address is string %}
+Address='{{ item.address }}'
+{% elif item.address %}
+Address=({% if item.address %}{{ '\'' + item.address | join('\' \'') + '\'' }}{% endif %})
+{% endif %}
+{% endif %}
+{% if item.gateway is defined and item.gateway | ipaddr('host') %}
+Gateway='{{ item.gateway }}'
+{% endif %}
+{% endif %}
+{% if item.ip == 'dhcp' %}
+IP='{{ item.ip }}'
+{% if item.dhcp_client is defined %}
+DHCPClient=('{{ item.dhcp_client }}')
+{% endif %}
+{% if item.dhcp_options is defined %}
+{{ item.dhcp_client }}Options='{{ item.dhcp_options }}'
+{% endif %}
+{% endif %}
+{% if item.dns is defined and item.dns | ipaddr ('host') %}
+{% if item.dns is string %}
+DNS='{{ item.dns }}'
+{% elif item.dns %}
+DNS=({% if item.dns %}{{ '\'' + item.dns | join('\' \'') + '\'' }}{% endif %})
+{% endif %}
+{% endif %}

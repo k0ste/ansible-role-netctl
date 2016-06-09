@@ -1,0 +1,13 @@
+{% if item.exec_up_post is defined and item.exec_up_post != '' %}
+ExecUpPost='{{ item.exec_up_post }}'
+{% endif %}
+{% if item.exec_down_pre is defined and item.exec_down_pre != '' %}
+ExecDownPre='{{ item.exec_down_pre }}'
+{% endif %}
+{% if item.ip_custom is defined %}
+{% if item.ip_custom is string %}
+IPCustom='{{ item.ip_custom }}'
+{% elif item.ip_custom %}
+IPCustom=({% if item.ip_custom %}{{ '\'' + item.ip_custom | join('\'\n\'') + '\'' }}{% endif %})
+{% endif %}
+{% endif %}

@@ -1,8 +1,16 @@
-{% if item.exec_up_post is defined and item.exec_up_post != '' %}
+{% if item.exec_up_post is defined %}
+{% if item.exec_up_post is string %}
 ExecUpPost='{{ item.exec_up_post }}'
+{% elif item.exec_up_post %}
+ExecUpPost=('{% if item.exec_up_post %}{{ item.exec_up_post | join(';\n') }}{% endif %}')
 {% endif %}
-{% if item.exec_down_pre is defined and item.exec_down_pre != '' %}
+{% endif %}
+{% if item.exec_down_pre is defined %}
+{% if item.exec_down_pre is string %}
 ExecDownPre='{{ item.exec_down_pre }}'
+{% elif item.exec_down_pre %}
+ExecDownPre=('{% if item.exec_down_pre %}{{ item.exec_down_pre | join(';\n') }}{% endif %}')
+{% endif %}
 {% endif %}
 {% if item.ip_custom is defined %}
 {% if item.ip_custom is string %}

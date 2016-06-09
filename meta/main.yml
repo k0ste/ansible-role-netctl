@@ -1,0 +1,13 @@
+---
+galaxy_info:
+  author: "Konstantin Shalygin <k0ste@k0ste.ru>"
+  company: YASB
+  license: GPL
+  min_ansible_version: 2.0
+  platforms:
+   - name: Archlinux
+      - any
+  categories:
+   - system
+   - networking
+dependencies: []

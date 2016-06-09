@@ -1,0 +1,13 @@
+---
+- name: Enable netctl profiles
+  service:
+    name: "{{ hostvars[inventory_hostname]['netctl_service'] + item.interface }}"
+    enabled: 'yes'
+  with_items: "{{ hostvars[inventory_hostname]['netctl'] }}"
+  when: "netctl_deploy_result|success and hostvars[inventory_hostname]['netctl_enable'] == 'true'"
+- name: Start netctl profiles
+  service:
+    name: "{{ hostvars[inventory_hostname]['netctl_service'] + item.interface }}"
+    state: 'restarted'
+  with_items: "{{ hostvars[inventory_hostname]['netctl'] }}"
+  when: "netctl_deploy_result|success and hostvars[inventory_hostname]['netctl_restart'] == 'true'"

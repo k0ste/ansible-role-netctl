@@ -14,7 +14,7 @@ Requirements for usage
 this. In order not to break anything, will not touch them;
 * netctl;
 * ppp, if pppoe is used;
-* [python-netaddr](//docs.ansible.com/ansible/playbooks_filters_ipaddr.html) library (on machine with Asnbile);
+* [python-netaddr](//docs.ansible.com/ansible/playbooks_filters_ipaddr.html) library (on machine with Ansible);
 
 Link types supported
 -----------------------
@@ -33,13 +33,14 @@ Extra
 * Support arrays of addresses, DNS;
 * DHCP client can be reassigned and accept options;
 * Support assign options for Bonding Linux module;
-* Any `ip` commands can be executed with start prifile;
+* Any `ip` commands can be executed with profile;
 * Support PostUp and PreDown command execution;
 
 Example configuration
 -------------------------
 
 ```yaml
+---
 netctl_address_array:
  - 10.7.0.6/24
  - 10.8.0.6/24

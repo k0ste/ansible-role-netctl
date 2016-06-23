@@ -1,5 +1,5 @@
 ---
-- name: Add the OS specific varibles
+- name: Add the OS specific variables
   include_vars: "{{ hostvars[inventory_hostname]['ansible_os_family'] + '.yml' }}"
 - name: Raise error
   fail: msg="Unknown distro. Netctl 100% works on Archlinux"

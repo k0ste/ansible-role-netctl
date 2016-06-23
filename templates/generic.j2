@@ -2,7 +2,7 @@
 Description='{{ item.description }}'
 {% endif %}
 Connection='{{ item.connection }}'
-{% if item.connection == 'pppoe' %}
+{% if item.connection in ['pppoe', 'mobile_ppp'] %}
 interface='{{ item.physdev }}'
 {% else %}
 Interface='{{ item.interface }}'

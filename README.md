@@ -22,6 +22,7 @@ Link types supported
 * ethernet (inc. pseudo, like IMQ);
 * vlan (802.1q);
 * pppoe (not all options, only what I use);
+* mobile_ppp (USB modem support);
 * tunnel (ipip, gre, etc);
 * bond (only with same parameters, for now netctl can't up multiple different bonds);
 
@@ -41,6 +42,9 @@ Example configuration
 
 ```yaml
 ---
+netctl_restart: 'true'
+netctl_enable: 'true'
+
 netctl_address_array:
  - 10.7.0.6/24
  - 10.8.0.6/24
@@ -175,6 +179,19 @@ ppp_default_route: 'false',
 ppp_peer_dns: 'false',
 ppp_unit: '0',
 force_connect: 'yes'
+}
+- {
+connection: 'mobile_ppp',
+interface: 'ppp1',
+physdev: '/dev/ttyUSB0',
+ppp_user: '',
+ppp_password: '',
+ppp_apn: 'internet.yota',
+ppp_number: '*99#',
+ppp_default_route: 'true',
+ppp_peer_dns: 'true',
+ppp_max_fail: '0',
+ppp_unit: '1'
 }
 - {
 connection: 'tunnel',

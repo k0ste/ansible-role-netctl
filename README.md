@@ -178,7 +178,7 @@ ppp_max_fail: '0',
 ppp_default_route: 'false',
 ppp_peer_dns: 'false',
 ppp_unit: '0',
-force_connect: 'yes'
+force_connect: 'true'
 }
 - {
 connection: 'mobile_ppp',

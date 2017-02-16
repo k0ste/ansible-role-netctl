@@ -19,7 +19,7 @@ this. In order not to break anything, will not touch them;
 Link types supported
 -----------------------
 
-* ethernet (inc. pseudo, like IMQ);
+* ethernet (inc. pseudo, like [IMQ](//github.com/imq/linuximq));
 * vlan (802.1q);
 * pppoe (not all options, only what I use);
 * mobile_ppp (USB modem support);

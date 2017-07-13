@@ -1,0 +1,6 @@
+---
+- assert:
+    that: "hostvars[inventory_hostname]['ansible_os_family'] == 'Archlinux'"
+    msg: "Unknown distro. Netctl 100% works on Archlinux only."
+- name: netctl | Add the OS specific variables
+  include_vars: "{{ hostvars[inventory_hostname]['ansible_os_family'] + '.yml' }}"

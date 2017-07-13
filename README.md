@@ -1,7 +1,8 @@
 ansible-role-netctl
 ======================
 
-Role for deploy profiles for systemd-based network-manager - [netctl](//github.com/joukewitteveen/netctl).
+Role for deploy profiles for systemd-based network-manager
+[netctl](//github.com/joukewitteveen/netctl).
 
 Ansible versions
 --------------------
@@ -14,7 +15,7 @@ Requirements for usage
 this. In order not to break anything, will not touch them;
 * netctl;
 * ppp, if pppoe is used;
-* [python-netaddr](//docs.ansible.com/ansible/playbooks_filters_ipaddr.html) library (on machine with Ansible);
+* [python-netaddr](//docs.ansible.com/ansible/playbooks_filters_ipaddr.html);
 
 Link types supported
 -----------------------
@@ -24,7 +25,8 @@ Link types supported
 * pppoe (not all options, only what I use);
 * mobile_ppp (USB modem support);
 * tunnel (ipip, gre, etc);
-* bond (only with same parameters, for now netctl can't up multiple different bonds);
+* bond (only with same parameters, for now netctl can't up multiple different
+bonds);
 
 Extra
 -----------

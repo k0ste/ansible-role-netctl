@@ -1,26 +1,6 @@
 ---
-- name: Add the OS specific variables
-  include_vars: "{{ hostvars[inventory_hostname]['ansible_os_family'] + '.yml' }}"
-- name: Raise error
-  fail: msg="Unknown distro. Netctl 100% works on Archlinux"
-  when: "hostvars[inventory_hostname]['ansible_os_family'] != 'Archlinux'"
-- name: Deploy netctl profiles
-  template:
-    src: "netctl.j2"
-    dest: "{{ hostvars[inventory_hostname]['netctl_dest'] + '/' + item.interface }}"
-    group: "root"
-    owner: "root"
-    mode: "0644"
-  with_items: "{{ hostvars[inventory_hostname]['netctl'] }}"
-  register: "netctl_deploy_result"
-  notify:
-    - 'Enable netctl profiles'
-    - 'Start netctl profiles'
-- name: Add kernel options for bonding
-  template:
-    src: "modprobe.j2"
-    dest: "{{ hostvars[inventory_hostname]['netctl_modprobe_dest'] + '/' + 'bonding.conf' }}"
-    group: "root"
-    owner: "root"
-    mode: "0644"
-  when: "hostvars[inventory_hostname]['netctl_bonding'] is defined"
+- include: pre_requisite.yml
+- include: deploy_netctl.yml
+  when:
+  - "hostvars[inventory_hostname]['netctl'] is defined"
+  - "hostvars[inventory_hostname]['netctl'] != ''"

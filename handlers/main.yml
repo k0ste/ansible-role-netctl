@@ -1,11 +1,17 @@
 ---
 - name: Enable netctl profiles
-  shell: "{{ 'netctl enable ' + item.interface }}"
+  command: "{{ 'netctl enable ' + item.interface }}"
   with_items: "{{ hostvars[inventory_hostname]['netctl'] }}"
-  when: "netctl_deploy_result|success and hostvars[inventory_hostname]['netctl_enable'] == 'true'"
+  when:
+  - "netctl_deploy_result|success"
+  - "hostvars[inventory_hostname]['netctl_enable'] == 'true'"
   register: "enable_result"
-  changed_when: "enable_result|success and ('already' not in enable_result.stderr and 'ln' in enable_result.stdout)"
+  changed_when:
+  - "enable_result|success"
+  - "('already' not in enable_result.stderr and 'ln' in enable_result.stdout)"
 - name: Start netctl profiles
-  shell: "{{ 'netctl start ' + item.interface }}"
+  command: "{{ 'netctl start ' + item.interface }}"
   with_items: "{{ hostvars[inventory_hostname]['netctl'] }}"
-  when: "netctl_deploy_result|success and hostvars[inventory_hostname]['netctl_restart'] == 'true'"
+  when:
+  - "netctl_deploy_result|success"
+  - "hostvars[inventory_hostname]['netctl_restart'] == 'true'"

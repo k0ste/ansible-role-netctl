@@ -8,6 +8,8 @@
     mode: "0644"
   with_items: "{{ hostvars[inventory_hostname]['netctl'] }}"
   register: "netctl_deploy_result"
+  loop_control:
+    label: "{{ item.interface }}"
   notify:
   - "Enable netctl profiles"
   - "Start netctl profiles"

@@ -1,16 +1,15 @@
-ansible-role-netctl
-======================
+netctl
+========
 
 Role for deploy profiles for systemd-based network-manager
 [netctl](//github.com/joukewitteveen/netctl).
 
-Ansible versions
---------------------
-Role is adapted for Ansible 2.0, should work on 1.9.
+
 
 Requirements for usage
------------------------------------
+-------------------------
 
+* Ansible 2.1;
 * ArchLinux based distro. Becasue I really don't know any other distro who use
 this. In order not to break anything, will not touch them;
 * netctl;
@@ -48,18 +47,22 @@ netctl_restart: 'true'
 netctl_enable: 'true'
 
 netctl_address_array:
- - 10.7.0.6/24
- - 10.8.0.6/24
+  - '10.7.0.6/24'
+  - '10.8.0.6/24'
+
 netctl_bond:
-  - eth0
-  - eth1
+  - 'eth0'
+  - 'eth1'
+
 netctl_custom:
   - 'link set dev eth0 txqueuelen 10000'
   - 'link set dev eth1 txqueuelen 10000'
+
 netctl_bonding:
   miimon: '100'
   mode: '4'
   xmit_hash_policy: '2'
+
 netctl_exec:
   - 'ethtool -K eth0 tso off'
   - 'ethtool -K eth1 tso off'

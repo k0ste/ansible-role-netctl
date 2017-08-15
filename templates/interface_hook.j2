@@ -1,0 +1,8 @@
+{{ '#!/bin/bash' }}
+{{ '## ' + item.interface + '-hook' }}
+{{ '# ' + ansible_managed }}
+{{ '# ' + 'Do not edit manually' }}
+
+{% for e in item.hook %}
+{{ e }}
+{% endfor %}

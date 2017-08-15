@@ -7,6 +7,12 @@
   when:
   - "hostvars[inventory_hostname]['netctl_interfaces'] is defined"
   - "hostvars[inventory_hostname]['netctl_interfaces'] != ''"
+- name: netctl | Set facts about hooks
+  set_fact:
+    network_hooks: "{{ hostvars[inventory_hostname]['netctl_hooks'] | json_query('[].name') }}"
+  when:
+  - "hostvars[inventory_hostname]['netctl_hooks'] is defined"
+  - "hostvars[inventory_hostname]['netctl_hooks'] != ''"
 - name: netctl | Find exists network profiles
   find:
     paths: "{{ hostvars[inventory_hostname]['netctl_dest'] + '/' + 'netctl' }}"

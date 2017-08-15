@@ -5,3 +5,8 @@
   - "vars['network_interfaces'] is defined"
   - "hostvars[inventory_hostname]['netctl_deploy_interfaces'] is defined"
   - "hostvars[inventory_hostname]['netctl_deploy_interfaces'] == 'true'"
+- include: hook_executor.yml
+  when:
+  - "vars['network_hooks'] is defined"
+  - "hostvars[inventory_hostname]['netctl_deploy_global_hooks'] is defined"
+  - "hostvars[inventory_hostname]['netctl_deploy_global_hooks'] == 'true'"

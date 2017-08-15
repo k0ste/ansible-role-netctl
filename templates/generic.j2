@@ -17,11 +17,11 @@
 {% if item.timeout_up is defined and item.timeout_up != '' %}
 {{ 'TimeoutUp' + '=\"' + item.timeout_up + '\"' }}
 {% endif %}
-{% if item.exec_up_post is defined and item.exec_up_post != '' %}
-{% if item.exec_up_post is string %}
-{{ 'ExecUpPost' + '=\"' + item.exec_up_post + '\"' }}
-{% elif item.exec_up_post is sequence %}
-{% for eup in item.exec_up_post %}
+{% if item.ifup_local is defined and item.ifup_local != '' %}
+{% if item.ifup_local is string %}
+{{ 'ExecUpPost' + '=\"' + item.ifup_local + '\"' }}
+{% elif item.ifup_local is sequence %}
+{% for eup in item.ifup_local %}
 {%- if loop.first %}
 {{ 'ExecUpPost' + '=(\"' -}}
 {% endif %}
@@ -34,11 +34,11 @@
 {% endfor %}
 {% endif %}
 {% endif %}
-{% if item.exec_down_pre is defined and item.exec_down_pre != '' %}
-{% if item.exec_down_pre is string %}
-{{ 'ExecDownPre' + '=\"' + item.exec_down_pre + '\"' }}
-{% elif item.exec_down_pre is sequence %}
-{% for edp in item.exec_down_pre %}
+{% if item.ifdown_local is defined and item.ifdown_local != '' %}
+{% if item.ifdown_local is string %}
+{{ 'ExecDownPre' + '=\"' + item.ifdown_local + '\"' }}
+{% elif item.ifdown_local is sequence %}
+{% for edp in item.ifdown_local %}
 {%- if loop.first %}
 {{ 'ExecDownPre' + '=(\"' -}}
 {% endif %}

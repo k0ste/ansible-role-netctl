@@ -45,6 +45,15 @@ netctl_restart: 'false'
 netctl_enable: 'true'
 netctl_drop_exists: 'false'
 netctl_deploy_interfaces: 'true'
+netctl_deploy_interface_hooks: 'true'
+netctl_deploy_global_hooks: 'true'
+
+# Netctl global hooks
+netctl_hooks:
+- name: 'hook1'
+  action:
+  - 'echo 1 > /proc/net/super'
+  - 'echo 2 > /proc/net/super'
 
 netctl_interfaces:
 - interface: 'lag0'
@@ -62,12 +71,14 @@ netctl_interfaces:
   - 'xmit_hash_policy 2'
   - 'lacp_rate 1'
   - 'miimon 100'
-  exec_up_post:
+  ifup_local:
   - 'ethtool -K eth0 tso off'
   - 'ethtool -K eth1 tso off'
   ip_custom:
   - 'link set dev eth0 txqueuelen 10000'
   - 'link set dev eth1 txqueuelen 10000'
+  hook:
+  - 'systemctl restart application'
 - interface: 'vlan100'
   connection: 'vlan'
   physdev: 'lag0'

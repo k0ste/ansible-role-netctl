@@ -1,6 +1,11 @@
-Mode='{{ item.tun_mode }}'
-Local='{{ item.tun_local }}'
-Remote='{{ item.tun_remote }}'
-{% if item.tun_mode == 'gre' and item.tun_key is defined %}
-Key='{{ item.tun_key }}'
+{{ 'Mode' + '=\"' + item.tun_mode + '\"' }}
+{% if item.tun_local | ipaddr('host') %}
+{{ 'Local' + '=\"' + item.tun_local + '\"' }}
+{% endif %}
+{% if item.tun_remote | ipaddr('host') %}
+{{ 'Remote' + '=\"' + item.tun_remote + '\"' }}
+{% endif %}
+{% if item.tun_mode == 'gre' and (item.tun_key is defined
+                              and item.tun_key != '') %}
+{{ 'Key' ~ '=\"' ~ item.tun_key ~ '\"' }}
 {% endif %}

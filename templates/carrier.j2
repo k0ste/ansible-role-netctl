@@ -1,9 +1,0 @@
-{% if item.skip_no_carrier is defined and item.skip_no_carrier == 'true' %}
-SkipNoCarrier='yes'
-{% endif %}
-{% if item.force_connect is defined and item.force_connect == 'true' %}
-ForceConnect='yes'
-{% endif %}
-{% if item.timeout_up is defined and item.timeout_up != '' %}
-TimeoutUp='{{ item.timeout_up }}'
-{% endif %}

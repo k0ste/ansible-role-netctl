@@ -1,0 +1,22 @@
+{% if item.ppp_user is defined and item.ppp_user != '' %}
+{{ 'User' ~ '=\"' ~ item.ppp_user ~ '\"' }}
+{% endif %}
+{% if item.ppp_password is defined and item.ppp_password != '' %}
+{{ 'Password' ~ '=\"' ~ item.ppp_password ~ '\"' }}
+{% endif %}
+{% if item.ppp_mode is defined and item.ppp_mode in ['persist', 'demand'] %}
+{{ 'ConnectionMode' + '=\"' + item.ppp_mode + '\"' }}
+{% endif %}
+{% if item.ppp_max_fail is defined and item.ppp_max_fail != '' %}
+{{ 'MaxFail' ~ '=\"' ~ item.ppp_max_fail ~ '\"' }}
+{% endif %}
+{% if item.ppp_default_route is defined
+  and item.ppp_default_route in ['true', 'false'] %}
+{{ 'DefaultRoute' + '=\"' + item.ppp_default_route + '\"' }}
+{% endif %}
+{% if item.ppp_peer_dns is defined and item.ppp_peer_dns in ['true', 'false'] %}
+{{ 'UsePeerDNS' + '=\"' + item.ppp_peer_dns + '\"' }}
+{% endif %}
+{% if item.ppp_unit is defined and item.ppp_unit != '' %}
+{{ 'PPPUnit' ~ '=\"' ~ item.ppp_unit ~ '\"' }}
+{% endif %}

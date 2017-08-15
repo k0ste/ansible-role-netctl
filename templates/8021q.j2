@@ -1,2 +1,3 @@
-BindsToInterfaces='{{ item.physdev }}'
-VLANID='{{ item.vlan_id }}'
+{# For vlan physdev and vid is all mandatory. #}
+{{ 'BindsToInterfaces' ~ '=\"' ~ item.physdev ~ '\"' }}
+{{ 'VLANID' ~ '=\"' ~ item.vlan_id ~ '\"' }}

@@ -1,15 +1,12 @@
-## netctl@{{ item.interface }}
-# {{ ansible_managed }}
-# Do not edit manually
+{{ '## ' ~ 'netctl@' ~ item.interface }}
+{{ '# ' + ansible_managed }}
+{{ '# ' + 'Do not edit manually' }}
 
-{% if item.connection is defined %}{%- include 'generic.j2' -%}{% endif %}
-{% if item.ip is defined %}{%- include 'ip.j2' -%}{% endif %}
-{% if item.connection == 'vlan' %}{%- include '8021q.j2' -%}
-{% elif item.connection == 'bond' %}{%- include 'bond.j2' -%}
-{% elif item.connection == 'tunnel' %}{%- include 'tunnel.j2' -%}
-{% elif item.connection == 'pppoe' %}{%- include 'pppoe.j2' -%}
-{% elif item.connection == 'mobile_ppp' %}{%- include 'mobile_ppp.j2' -%}
+{% include 'generic.j2' -%}
+{% if item.ip is defined and item.ip in ['static', 'dhcp'] %}{%- include 'ip.j2' -%}{% endif %}
+{% if item.connection is defined and item.connection == 'vlan' %}{%- include '8021q.j2' -%}
+{% elif item.connection is defined and item.connection == 'bond' %}{%- include 'bond.j2' -%}
+{% elif item.connection is defined and item.connection == 'tunnel' %}{%- include 'tunnel.j2' -%}
+{% elif item.connection is defined and item.connection == 'pppoe' %}{%- include 'ppp.j2' -%}
+{% elif item.connection is defined and item.connection == 'mobile_ppp' %}{%- include 'ppp.j2' -%}{%- include 'mobile_ppp.j2' -%}
 {% endif %}
-
-{% include 'carrier.j2' %}
-{% include 'exec.j2' %}

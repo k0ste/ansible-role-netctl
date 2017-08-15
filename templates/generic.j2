@@ -1,9 +1,87 @@
 {% if item.description is defined and item.description != '' %}
-Description='{{ item.description }}'
+{{ 'Description' ~ '=\"' ~ item.description ~ '\"' }}
 {% endif %}
-Connection='{{ item.connection }}'
+{# Connection is mandatory, so error here if not defined #}
+{{ 'Connection' ~ '=\"' ~ item.connection ~ '\"' }}
 {% if item.connection in ['pppoe', 'mobile_ppp'] %}
-Interface='{{ item.physdev }}'
+{{ 'Interface' ~ '=\"' ~ item.physdev ~ '\"' }}
 {% else %}
-Interface='{{ item.interface }}'
+{{ 'Interface' ~ '=\"' ~ item.interface ~ '\"' }}
+{% endif %}
+{% if item.skip_no_carrier is defined and item.skip_no_carrier == 'yes' %}
+{{ 'SkipNoCarrier' + '=\"' + item.skip_no_carrier + '\"' }}
+{% endif %}
+{% if item.force_connect is defined and item.force_connect == 'true' %}
+{{ 'ForceConnect' + '=\"' + item.force_connect + '\"' }}
+{% endif %}
+{% if item.timeout_up is defined and item.timeout_up != '' %}
+{{ 'TimeoutUp' + '=\"' + item.timeout_up + '\"' }}
+{% endif %}
+{% if item.exec_up_post is defined and item.exec_up_post != '' %}
+{% if item.exec_up_post is string %}
+{{ 'ExecUpPost' + '=\"' + item.exec_up_post + '\"' }}
+{% elif item.exec_up_post is sequence %}
+{% for eup in item.exec_up_post %}
+{%- if loop.first %}
+{{ 'ExecUpPost' + '=(\"' -}}
+{% endif %}
+{{ eup -}}
+{% if loop.last %}
+{{ '\")' }}
+{% else %}
+{{ '; ' -}}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% if item.exec_down_pre is defined and item.exec_down_pre != '' %}
+{% if item.exec_down_pre is string %}
+{{ 'ExecDownPre' + '=\"' + item.exec_down_pre + '\"' }}
+{% elif item.exec_down_pre is sequence %}
+{% for edp in item.exec_down_pre %}
+{%- if loop.first %}
+{{ 'ExecDownPre' + '=(\"' -}}
+{% endif %}
+{{ edp -}}
+{% if loop.last %}
+{{ '\")' }}
+{% else %}
+{{ '; ' -}}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% if item.ip_custom is defined and item.ip_custom != '' %}
+{% if item.ip_custom is string %}
+{{ 'IPCustom' + '=\"' + item.ip_custom + '\"' }}
+{% elif item.ip_custom is sequence %}
+{% for ic in item.ip_custom %}
+{% if loop.first %}
+{{ 'IPCustom' + '=(' -}}
+{% endif %}
+{{ '\"' + ic + '\"' -}}
+{% if loop.last %}
+{{ ')' }}
+{% else %}
+{{ ' ' -}}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+{% if item.link_options is defined and item.link_options != '' %}
+{% if item.link_options is string %}
+{{ 'LinkOptions' + '=\"' + item.link_options + '\"' }}
+{% elif item.link_options is sequence %}
+{% for lo in item.link_options %}
+{% if loop.first %}
+{{ 'LinkOptions' + '=(' -}}
+{% endif %}
+{{ '\"' + lo + '\"' -}}
+{% if loop.last %}
+{{ ')' }}
+{% else %}
+{{ ' ' -}}
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endif %}

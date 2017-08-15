@@ -1,4 +1,2 @@
 ---
-netctl_service: 'netctl@'
 netctl_dest: '/etc/netctl'
-netctl_modprobe_dest: '/etc/modprobe.d'

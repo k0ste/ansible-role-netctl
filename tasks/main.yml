@@ -1,6 +1,7 @@
 ---
 - include: pre_requisite.yml
-- include: deploy_netctl.yml
+- include: interface_executor.yml
   when:
-  - "hostvars[inventory_hostname]['netctl'] is defined"
-  - "hostvars[inventory_hostname]['netctl'] != ''"
+  - "vars['network_interfaces'] is defined"
+  - "hostvars[inventory_hostname]['netctl_deploy_interfaces'] is defined"
+  - "hostvars[inventory_hostname]['netctl_deploy_interfaces'] == 'true'"

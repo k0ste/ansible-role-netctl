@@ -1,29 +1,51 @@
+{{ 'IP' + '=\"' + item.ip + '\"' }}
 {% if item.ip == 'static' %}
-IP='{{ item.ip }}'
-{% if item.address is defined and item.address | ipaddr('host/prefix') %}
-{% if item.address is string %}
-Address='{{ item.address }}'
-{% elif item.address %}
-Address=({% if item.address %}{{ '\'' + item.address | join('\' \'') + '\'' }}{% endif %})
+{% if item.address is defined and item.address != '' %}
+{% if item.address is string and item.address | ipaddr('host/prefix') %}
+{{ 'Address' + '=\"' + item.address + '\"' }}
+{% elif item.address is sequence %}
+{% for a in item.address %}
+{% if a | ipaddr('host/prefix') %}
+{% if loop.first %}
+{{ 'Address' + '=(' -}}
 {% endif %}
+{{ '\"' + a + '\"' -}}
+{% if loop.last %}
+{{ ')' }}
+{% else %}
+{{ ' ' -}}
+{% endif %}
+{% endif %}
+{% endfor %}
 {% endif %}
 {% if item.gateway is defined and item.gateway | ipaddr('host') %}
-Gateway='{{ item.gateway }}'
+{{ 'Gateway' + '=\"' + item.gateway + '\"' }}
 {% endif %}
 {% endif %}
-{% if item.ip == 'dhcp' %}
-IP='{{ item.ip }}'
+{% elif item.ip == 'dhcp' %}
 {% if item.dhcp_client is defined %}
-DHCPClient=('{{ item.dhcp_client }}')
+{{ 'DHCPClient' + '=(\"' + item.dhcp_client + '\")' }}
 {% endif %}
 {% if item.dhcp_options is defined %}
-{{ item.dhcp_client }}Options='{{ item.dhcp_options }}'
+{{ item.dhcp_client + 'Options' + '=\"' + item.dhcp_options + '\"' }}
 {% endif %}
 {% endif %}
-{% if item.dns is defined and item.dns | ipaddr ('host') %}
-{% if item.dns is string %}
-DNS='{{ item.dns }}'
-{% elif item.dns %}
-DNS=({% if item.dns %}{{ '\'' + item.dns | join('\' \'') + '\'' }}{% endif %})
+{% if item.dns is defined and item.dns != '' %}
+{% if item.dns is string and item.dns | ipaddr ('host') %}
+{{ 'DNS' + '=\"' + item.dns + '\"' }}
+{% elif item.dns is sequence %}
+{% for d in item.dns %}
+{% if d | ipaddr ('host') %}
+{% if loop.first %}
+{{ 'DNS' + '=(' -}}
+{% endif %}
+{{ '\"' + d + '\"' -}}
+{% if loop.last %}
+{{ ')' }}
+{% else %}
+{{ ' ' -}}
+{% endif %}
+{% endif %}
+{% endfor %}
 {% endif %}
 {% endif %}

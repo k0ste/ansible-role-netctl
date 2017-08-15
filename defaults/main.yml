@@ -1,3 +1,6 @@
 ---
+netctl_interfaces: []
 netctl_restart: 'false'
 netctl_enable: 'false'
+netctl_drop_exists: 'false'
+netctl_deploy_interfaces: 'true'

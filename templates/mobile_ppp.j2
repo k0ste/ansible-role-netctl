@@ -1,6 +1,13 @@
+{% if item.ppp_mode is defined and item.ppp_mode in ['3Gpref', '3Gonly',
+                                            'GPRSpref', 'GPRSonly', 'None'] %}
+{{ 'ConnectionMode' + '=\"' + item.ppp_mode + '\"' }}
+{% endif %}
 {% if item.ppp_apn is defined and item.ppp_apn != '' %}
 {{ 'AccessPointName' + '=\"' + item.ppp_apn + '\"' }}
 {% endif %}
 {% if item.ppp_number is defined and item.ppp_number != '' %}
 {{ 'PhoneNumber' ~ '=\"' ~ item.ppp_number ~ '\"' }}
+{% endif %}
+{% if item.ppp_init is defined and item.ppp_init != '' %}
+{{ 'Init' + '=\"' + item.ppp_init + '\"' }}
 {% endif %}

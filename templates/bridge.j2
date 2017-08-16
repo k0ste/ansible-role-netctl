@@ -1,0 +1,6 @@
+{% if item.physdev is defined and item.physdev != '' %}
+{{ 'BindsToInterfaces' ~ '=\"' ~ item.physdev ~ '\"' }}
+{% endif %}
+{% if item.skip_forward is defined and item.skip_forward in ['yes', 'no'] %}
+{{ 'SkipForwardingDelay' ~ '=\"' ~ item.skip_forward ~ '\"' }}
+{% endif %}

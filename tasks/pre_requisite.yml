@@ -15,15 +15,37 @@
   - "hostvars[inventory_hostname]['netctl_hooks'] != ''"
 - name: netctl | Find exists network profiles
   find:
-    paths: "{{ hostvars[inventory_hostname]['netctl_dest'] + '/' + 'netctl' }}"
+    paths: "{{ hostvars[inventory_hostname]['netctl_dest'] }}"
     recurse: "no"
     file_type: "file"
     patterns: "(.*)"
     use_regex: "true"
   register: "find_result"
   when:
-  - "hostvars[inventory_hostname]['netctl_drop_exists'] is defined"
-  - "hostvars[inventory_hostname]['netctl_drop_exists'] == 'true'"
+  - "hostvars[inventory_hostname]['netctl_drop_exists_interfaces'] is defined"
+  - "hostvars[inventory_hostname]['netctl_drop_exists_interfaces'] == 'true'"
+- name: netctl | Find exists network hooks (global)
+  find:
+    paths: "{{ hostvars[inventory_hostname]['netctl_dest'] + '/' + 'hooks' }}"
+    recurse: "no"
+    file_type: "file"
+    patterns: "(.*)"
+    use_regex: "true"
+  register: "find_hook_global_result"
+  when:
+  - "hostvars[inventory_hostname]['netctl_drop_exists_hooks'] is defined"
+  - "hostvars[inventory_hostname]['netctl_drop_exists_hooks'] == 'true'"
+- name: netctl | Find exists network hooks (per interface)
+  find:
+    paths: "{{ hostvars[inventory_hostname]['netctl_dest'] + '/' + 'interfaces' }}"
+    recurse: "no"
+    file_type: "file"
+    patterns: "(.*)"
+    use_regex: "true"
+  register: "find_hook_int_result"
+  when:
+  - "hostvars[inventory_hostname]['netctl_drop_exists_hooks'] is defined"
+  - "hostvars[inventory_hostname]['netctl_drop_exists_hooks'] == 'true'"
 - name: netctl | Delete exists network profiles
   file:
     path: "{{ item.path }}"
@@ -33,3 +55,15 @@
     label: "{{ item.path }}"
   when:
   - "vars['find_result']['files'] is defined"
+- name: netctl | Delete exists hooks
+  file:
+    path: "{{ item.path }}"
+    state: "absent"
+  with_items:
+  - "{{ vars['find_hook_global_result']['files'] }}"
+  - "{{ vars['find_hook_int_result']['files'] }}"
+  loop_control:
+    label: "{{ item.path }}"
+  when:
+  - "vars['find_hook_global_result']['files'] is defined
+     or vars['find_hook_int_result']['files'] is defined"

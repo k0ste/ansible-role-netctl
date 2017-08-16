@@ -17,6 +17,9 @@
 {% if item.timeout_up is defined and item.timeout_up != '' %}
 {{ 'TimeoutUp' + '=\"' + item.timeout_up + '\"' }}
 {% endif %}
+{% if item.wait_online is defined and item.wait_online in ['yes', 'no'] %}
+{{ 'WaitOnline' + '=\"' + item.wait_online + '\"' }}
+{% endif %}
 {% if item.ifup_local is defined and item.ifup_local != '' %}
 {% if item.ifup_local is string %}
 {{ 'ExecUpPost' + '=\"' + item.ifup_local + '\"' }}

@@ -5,7 +5,15 @@
 {% if item.tun_remote | ipaddr('host') %}
 {{ 'Remote' + '=\"' + item.tun_remote + '\"' }}
 {% endif %}
-{% if item.tun_mode == 'gre' and (item.tun_key is defined
-                              and item.tun_key != '') %}
+{% if item.tun_mode == 'gre' %}
+{% if item.tun_key is defined and item.tun_key != '' %}
 {{ 'Key' ~ '=\"' ~ item.tun_key ~ '\"' }}
+{% endif %}
+{% elif item.tun_mode in ['tun', 'tap'] %}
+{% if item.tun_user is defined and item.tun_user != '' %}
+{{ 'User' ~ '=\"' ~ item.tun_user ~ '\"' }}
+{% endif %}
+{% if item.tun_group is defined and item.tun_group != '' %}
+{{ 'Group' ~ '=\"' ~ item.tun_group ~ '\"' }}
+{% endif %}
 {% endif %}

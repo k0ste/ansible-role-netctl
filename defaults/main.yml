@@ -3,7 +3,8 @@ netctl_interfaces: []
 netctl_hooks: []
 netctl_restart: 'false'
 netctl_enable: 'false'
-netctl_drop_exists: 'false'
+netctl_drop_exists_interfaces: 'false'
+netctl_drop_exists_hooks: 'false'
 netctl_deploy_interfaces: 'true'
 netctl_deploy_interface_hooks: 'true'
 netctl_deploy_global_hooks: 'true'

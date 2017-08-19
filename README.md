@@ -93,7 +93,7 @@ netctl_interfaces:
   timeout_up: '5'
 # Set to 'yes' to consider the profile activated only when it is online.
   wait_online: 'no'
-# Additional options to be passed to ip link. Run `ip link add type bridge help`
+# Additional options to be passed to ip link. Run `ip link add type bond help`
 # to see the available options.
   link_options:
   - 'mode 4'

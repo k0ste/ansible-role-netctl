@@ -77,11 +77,11 @@
 {% elif item.link_options is sequence %}
 {% for lo in item.link_options %}
 {% if loop.first %}
-{{ 'LinkOptions' + '=(' -}}
+{{ 'LinkOptions' + '=\"' -}}
 {% endif %}
-{{ '\"' + lo + '\"' -}}
+{{ lo -}}
 {% if loop.last %}
-{{ ')' }}
+{{ '\"' }}
 {% else %}
 {{ ' ' -}}
 {% endif %}

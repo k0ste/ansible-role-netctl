@@ -8,10 +8,10 @@
 {% else %}
 {{ 'Interface' ~ '=\"' ~ item.interface ~ '\"' }}
 {% endif %}
-{% if item.skip_no_carrier is defined and item.skip_no_carrier == 'yes' %}
+{% if item.skip_no_carrier is defined and item.skip_no_carrier in ['yes', 'no'] %}
 {{ 'SkipNoCarrier' + '=\"' + item.skip_no_carrier + '\"' }}
 {% endif %}
-{% if item.force_connect is defined and item.force_connect == 'true' %}
+{% if item.force_connect is defined and item.force_connect in ['yes', 'no'] %}
 {{ 'ForceConnect' + '=\"' + item.force_connect + '\"' }}
 {% endif %}
 {% if item.timeout_up is defined and item.timeout_up != '' %}

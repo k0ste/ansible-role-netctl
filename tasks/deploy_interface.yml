@@ -2,12 +2,14 @@
 - name: netctl | Deploy interfaces
   template:
     src: "netctl.j2"
-    dest: "{{ hostvars[inventory_hostname]['netctl_dest'] ~ '/' ~ item.interface }}"
+    dest: "{{ hostvars[inventory_hostname]['netctl_dest'] ~ '/' ~
+              item.interface }}"
     group: "root"
     owner: "root"
     force: "yes"
     mode: "0644"
-  with_items: "{{ hostvars[inventory_hostname]['netctl_interfaces'] | json_query(\"[?interface=='\" + vars['outer_item'] + \"']\") }}"
+  with_items: "{{ hostvars[inventory_hostname]['netctl_interfaces'] |
+                  json_query(\"[?interface=='\" + vars['outer_item'] + \"']\") }}"
   loop_control:
     label: "{{ item.interface }}"
   notify:
@@ -16,12 +18,14 @@
 - name: netctl | Deploy interface hooks
   template:
     src: "interface_hook.j2"
-    dest: "{{ hostvars[inventory_hostname]['netctl_dest'] ~ '/' ~ 'interfaces' ~ '/' ~ item.interface }}"
+    dest: "{{ hostvars[inventory_hostname]['netctl_dest'] ~ '/' ~
+              'interfaces' ~ '/' ~ item.interface }}"
     group: "root"
     owner: "root"
     force: "yes"
     mode: "0755"
-  with_items: "{{ hostvars[inventory_hostname]['netctl_interfaces'] | json_query(\"[?interface=='\" + vars['outer_item'] + \"']\") }}"
+  with_items: "{{ hostvars[inventory_hostname]['netctl_interfaces'] |
+                  json_query(\"[?interface=='\" + vars['outer_item'] + \"']\") }}"
   loop_control:
     label: "{{ item.interface }}"
   when:

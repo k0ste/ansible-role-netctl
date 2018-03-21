@@ -1,5 +1,5 @@
 ---
-- include: deploy_interface.yml
+- include_tasks: deploy_interface.yml
   with_items: "{{ vars['network_interfaces'] }}"
   loop_control:
     loop_var: "outer_item"

@@ -1,11 +1,11 @@
 ---
-- include: pre_requisite.yml
-- include: interface_executor.yml
+- include_tasks: pre_requisite.yml
+- include_tasks: interface_executor.yml
   when:
   - "vars['network_interfaces'] is defined"
   - "hostvars[inventory_hostname]['netctl_deploy_interfaces'] is defined"
   - "hostvars[inventory_hostname]['netctl_deploy_interfaces'] == 'true'"
-- include: hook_executor.yml
+- include_tasks: hook_executor.yml
   when:
   - "vars['network_hooks'] is defined"
   - "hostvars[inventory_hostname]['netctl_deploy_global_hooks'] is defined"

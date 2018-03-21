@@ -1,20 +1,16 @@
-netctl
-========
+# netctl
 
 Role for deploy profiles for systemd-based network-manager
 [netctl](//github.com/joukewitteveen/netctl).
 
+## Requirements for usage
 
-Requirements for usage
--------------------------
-
-* Ansible 2.2;
+* Ansible 2.4;
 * jmespath;
 * [python-netaddr](//docs.ansible.com/ansible/playbooks_filters_ipaddr.html);
 * ppp, if pppoe is used;
 
-Link types supported
------------------------
+## Link types supported
 
 * ethernet (inc. pseudo, like [IMQ](//github.com/imq/linuximq));
 * vlan (802.1q);
@@ -24,8 +20,7 @@ Link types supported
 * bonding;
 * bridge;
 
-Extra
------------
+## Extra
 
 * ip addresses, before deploy will be checked by Jinja with python-netaddr lib;
 * Support 'static' and 'dhcp' connections;
@@ -36,8 +31,7 @@ Extra
   available options);
 * Support PostUp and PreDown command execution;
 
-Example configuration
--------------------------
+## Example configuration
 
 ```yaml
 ---

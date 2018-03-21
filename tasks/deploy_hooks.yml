@@ -2,11 +2,13 @@
 - name: netctl | Deploy hooks
   template:
     src: "hooks.j2"
-    dest: "{{ hostvars[inventory_hostname]['netctl_dest'] ~ '/' ~ 'hooks' ~ '/' ~ item.name }}"
+    dest: "{{ hostvars[inventory_hostname]['netctl_dest'] ~ '/' ~
+              'hooks' ~ '/' ~ item.name }}"
     group: "root"
     owner: "root"
     force: "yes"
     mode: "0755"
-  with_items: "{{ hostvars[inventory_hostname]['netctl_hooks'] | json_query(\"[?name=='\" + vars['outer_item'] + \"']\") }}"
+  with_items: "{{ hostvars[inventory_hostname]['netctl_hooks'] |
+                  json_query(\"[?name=='\" + vars['outer_item'] + \"']\") }}"
   loop_control:
     label: "{{ item.name }}"

@@ -1,5 +1,5 @@
 ---
-- include_tasks: pre_requisite.yml
+- import_tasks: pre_requisite.yml
 - include_tasks: interface_executor.yml
   when:
   - "vars['network_interfaces'] is defined"

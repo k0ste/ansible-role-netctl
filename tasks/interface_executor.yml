@@ -1,5 +1,5 @@
 ---
 - include_tasks: deploy_interface.yml
-  with_items: "{{ vars['network_interfaces'] }}"
+  loop: "{{ vars['network_interfaces'] | flatten(levels=1) }}"
   loop_control:
     loop_var: "outer_item"

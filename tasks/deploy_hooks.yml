@@ -8,7 +8,8 @@
     owner: "root"
     force: "yes"
     mode: "0755"
-  with_items: "{{ hostvars[inventory_hostname]['netctl_hooks'] |
-                  json_query(\"[?name=='\" + vars['outer_item'] + \"']\") }}"
+  loop: "{{ hostvars[inventory_hostname]['netctl_hooks'] |
+    json_query(\"[?name=='\" ~ vars['outer_item'] ~ \"']\") |
+    flatten(levels=1) }}"
   loop_control:
     label: "{{ item.name }}"

@@ -5,10 +5,7 @@ Role for deploy profiles for systemd-based network-manager
 
 ## Requirements for usage
 
-* Ansible 2.4;
-* jmespath;
-* [python-netaddr](//docs.ansible.com/ansible/playbooks_filters_ipaddr.html);
-* ppp, if pppoe is used;
+* Ansible 2.5+;
 
 ## Link types supported
 

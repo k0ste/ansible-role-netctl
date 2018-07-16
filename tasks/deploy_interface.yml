@@ -3,13 +3,14 @@
   template:
     src: "netctl.j2"
     dest: "{{ hostvars[inventory_hostname]['netctl_dest'] ~ '/' ~
-              item.interface }}"
+      item.interface }}"
     group: "root"
     owner: "root"
     force: "yes"
     mode: "0644"
-  with_items: "{{ hostvars[inventory_hostname]['netctl_interfaces'] |
-                  json_query(\"[?interface=='\" + vars['outer_item'] + \"']\") }}"
+  loop: "{{ hostvars[inventory_hostname]['netctl_interfaces'] |
+    json_query(\"[?interface=='\" ~ vars['outer_item'] ~ \"']\") |
+    flatten(levels=1) }}"
   loop_control:
     label: "{{ item.interface }}"
   notify:
@@ -19,13 +20,14 @@
   template:
     src: "interface_hook.j2"
     dest: "{{ hostvars[inventory_hostname]['netctl_dest'] ~ '/' ~
-              'interfaces' ~ '/' ~ item.interface }}"
+      'interfaces' ~ '/' ~ item.interface }}"
     group: "root"
     owner: "root"
     force: "yes"
     mode: "0755"
-  with_items: "{{ hostvars[inventory_hostname]['netctl_interfaces'] |
-                  json_query(\"[?interface=='\" + vars['outer_item'] + \"']\") }}"
+  loop: "{{ hostvars[inventory_hostname]['netctl_interfaces'] |
+    json_query(\"[?interface=='\" ~ vars['outer_item'] ~ \"']\") |
+    flatten(levels=1) }}"
   loop_control:
     label: "{{ item.interface }}"
   when:

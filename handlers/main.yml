@@ -1,19 +1,17 @@
 ---
 - name: Enable netctl profiles
   command: "{{ 'netctl enable' ~ ' ' ~ item }}"
-  with_items: "{{ vars['network_interfaces'] }}"
+  loop: "{{ vars['network_interfaces'] | flatten(levels=1) }}"
   register: "enable_result"
   changed_when:
-  - "enable_result|success"
+  - "enable_result is success"
   - "('already' not in enable_result.stderr and 'ln' in enable_result.stdout)"
   when:
   - "hostvars[inventory_hostname]['netctl_enable'] is defined"
   - "hostvars[inventory_hostname]['netctl_enable'] == 'true'"
 - name: Start netctl profiles
-  command: "{{ 'netctl start' ~ ' ' ~ item.interface }}"
-  with_items: "{{ hostvars[inventory_hostname]['netctl'] }}"
-  loop_control:
-    label: "{{ item.interface }}"
+  command: "{{ 'netctl start' ~ ' ' ~ item }}"
+  loop: "{{ vars['network_interfaces'] | flatten(levels=1) }}"
   when:
   - "hostvars[inventory_hostname]['netctl_restart'] is defined"
   - "hostvars[inventory_hostname]['netctl_restart'] == 'true'"

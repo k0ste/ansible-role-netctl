@@ -187,4 +187,18 @@ netctl_interfaces:
   tun_remote: '5.128.220.250'
   ip: 'static'
   address: '10.17.17.1/24'
+- interface: 'br0'
+  description: 'LAN Bridge'
+  connection: 'bridge'
+  ip: 'static'
+  address: '192.168.100.1/24'
+  skip_no_carrier: 'yes' # needed to allow down ports to not delay bridge coming up
+  dns:
+    - 1.1.1.1
+    - 8.8.8.8
+  physdev:
+    - enp2s0
+    - enp3s0
+    - enp4s0
+    - enp5s0
 ```
